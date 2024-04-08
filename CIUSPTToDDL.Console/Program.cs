@@ -4,7 +4,7 @@
 /// </summary>
 /// <param name="fileToParse">The XML file content to parse.</param>
 /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
-var itemTransaction = CIUSPTToDDL.CIUSPTToDDL.Parse(CIUSPTToDDL.Console.Properties.Resources.ciusptSampleFile);
+var itemTransaction = CIUSPTToDDL.Lib.CIUSPTToDDL.Parse(CIUSPTToDDL.Console.Properties.Resources.ciusptSampleFile);
 
 /// <summary>
 /// JSON serialization options.

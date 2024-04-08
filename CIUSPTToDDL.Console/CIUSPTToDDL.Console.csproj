@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CIUSPTToDDL\CIUSPTToDDL.csproj" />
+    <ProjectReference Include="..\CIUSPTToDDL.Lib\CIUSPTToDDL.Lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,3 +3,7 @@
 /CIUSPTToDDL/obj
 /CIUSPTToDDL.Console/bin
 /CIUSPTToDDL.Console/obj
+/CIUSPTToDDL.Lib/obj
+/CIUSPTToDDL.Lib/bin
+/CIUSPTToDDL.Lib/CIUSPTToDDL.Lib.nuspec
+/CIUSPTToDDL.Lib/nugetPackagePush.cmd
