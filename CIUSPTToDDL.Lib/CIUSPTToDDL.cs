@@ -13,12 +13,27 @@ namespace CIUSPTToDDL.Lib
     /// </summary>
     public class CIUSPTToDDL
     {
+        #region "Properties"
+
+        /// <summary>
+        /// The parsed InvoiceType object.
+        /// </summary>
+        public InvoiceType ItemTransactionUBL { get; set; }
+        /// <summary>
+        /// The parsed ItemTransaction object.
+        /// </summary>
+        public ItemTransaction ItemTransaction { get; set; }
+
+        #endregion
+
+        #region "Public"
+
         /// <summary>
         /// Parses the given XML file containing a CIUSPT invoice and maps it to an ItemTransaction object.
         /// </summary>
         /// <param name="fileToParse">The XML file content to parse.</param>
         /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
-        public static ItemTransaction Parse(string fileToParse)
+        public ItemTransaction Parse(string fileToParse)
         {
             InvoiceType invoice = null;
 
@@ -49,15 +64,22 @@ namespace CIUSPTToDDL.Lib
             // Map the InvoiceType object to an ItemTransaction object
             var itemTransaction = mapper.Map<ItemTransaction>(invoice);
 
+            ItemTransactionUBL = invoice;
+            ItemTransaction = itemTransaction;
+
             return itemTransaction;
         }
+
+        #endregion
+
+        #region "Private"
 
         /// <summary>
         /// Maps a PartyType object to a Party object.
         /// </summary>
         /// <param name="partyType"></param>
         /// <returns></returns>
-        private static Party MapParty(PartyType partyType)
+        private Party MapParty(PartyType partyType)
         {
             // TODO: verify if CountryID is ISO 3166-1 alpha-2 code
             return new Party
@@ -77,7 +99,7 @@ namespace CIUSPTToDDL.Lib
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        private static UnloadPlaceAddress MapUnloadPlaceAddress(AddressType address)
+        private UnloadPlaceAddress MapUnloadPlaceAddress(AddressType address)
         {
             return new UnloadPlaceAddress
             {
@@ -93,7 +115,7 @@ namespace CIUSPTToDDL.Lib
         /// </summary>
         /// <param name="invoiceLines"></param>
         /// <returns></returns>
-        private static List<Detail> MapDetails(IEnumerable<InvoiceLineType> invoiceLines)
+        private List<Detail> MapDetails(IEnumerable<InvoiceLineType> invoiceLines)
         {
             var details = new List<Detail>();
 
@@ -111,5 +133,7 @@ namespace CIUSPTToDDL.Lib
 
             return details;
         }
+
+        #endregion
     }
 }

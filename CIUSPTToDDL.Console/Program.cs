@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
-/// <summary>
-/// Parses the given XML file containing a CIUSPT invoice and maps it to an ItemTransaction object.
-/// </summary>
-/// <param name="fileToParse">The XML file content to parse.</param>
-/// <returns>An ItemTransaction object representing the parsed invoice.</returns>
-var itemTransaction = CIUSPTToDDL.Lib.CIUSPTToDDL.Parse(CIUSPTToDDL.Console.Properties.Resources.ciusptSampleFile);
+
+var cIUSPTToDDL = new CIUSPTToDDL.Lib.CIUSPTToDDL();
+var itemTransaction = cIUSPTToDDL.Parse(CIUSPTToDDL.Console.Properties.Resources.ciusptSampleFile);
+var itemtransactionUBL = cIUSPTToDDL.ItemTransactionUBL;
+
 
 /// <summary>
 /// JSON serialization options.
