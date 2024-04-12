@@ -38,7 +38,7 @@ namespace CIUSPTToDDL.Lib
             InvoiceType invoice = null;
 
             // Convert string to TextReader
-            using (TextReader reader = new StringReader(fileToParse))
+            using (TextReader reader = new StringReader(File.ReadAllText(fileToParse)))
             {
                 invoice = UblDocument.Load<InvoiceType>(reader);
 
@@ -52,7 +52,9 @@ namespace CIUSPTToDDL.Lib
                     .ForMember(destination => destination.CreateDate, opt => opt.MapFrom(src => src.IssueDate.Value.DateTime))
                     .ForMember(destination => destination.DeferredPaymentDate, opt => opt.MapFrom(src => src.DueDate.Value.DateTime))
                     .ForMember(destination => destination.ContractReferenceNumber, opt => opt.MapFrom(src => src.BuyerReference.Value))
-                    .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party)))
+                    .ForMember(destination => destination.TotalAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxExclusiveAmount.Value))
+                    .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
+                    .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
                     .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
                     .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapDetails(src.InvoiceLine)))
                     .ForAllOtherMembers(opt => opt.Ignore()); // Ignore all other members, including methods
@@ -79,7 +81,7 @@ namespace CIUSPTToDDL.Lib
         /// </summary>
         /// <param name="partyType"></param>
         /// <returns></returns>
-        private Party MapParty(PartyType partyType)
+        private Party MapParty(PartyType partyType, LocationType locationType)
         {
             // TODO: verify if CountryID is ISO 3166-1 alpha-2 code
             return new Party
@@ -91,6 +93,7 @@ namespace CIUSPTToDDL.Lib
                 AddressLine2 = partyType.PostalAddress?.AdditionalStreetName?.Value,
                 PostalCode = partyType.PostalAddress?.PostalZone?.Value,
                 CountryID = partyType.PostalAddress?.Country?.IdentificationCode?.Value,
+                GLN = locationType.ID?.Value
             };
         }
 
