@@ -44,21 +44,7 @@ namespace CIUSPTToDDL.Lib
         /// </summary>
         /// <param name="fileToParse">The XML file content to parse.</param>
         /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
-        public ItemTransaction ParseFromString(string fileContent)
-        {
-            return Parse(fileContent);
-        }
-
-        #endregion
-
-        #region "Private"
-
-        /// <summary>
-        /// Internal parser.
-        /// </summary>
-        /// <param name="fileToParse">The XML file content to parse.</param>
-        /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
-        private ItemTransaction Parse(string fileContent)
+        public ItemTransaction Parse(string fileContent)
         {
             InvoiceType invoice = null;
 
@@ -79,9 +65,6 @@ namespace CIUSPTToDDL.Lib
                     .ForMember(destination => destination.ContractReferenceNumber, opt => opt.MapFrom(src => src.BuyerReference.Value))
                     .ForMember(destination => destination.TotalAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxExclusiveAmount.Value))
                     .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
-                    .ForMember(destination => destination.PartyAddressLine1, opt => opt.MapFrom(src => src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address.StreetName.Value))
-                    .ForMember(destination => destination.PartyAddressLine2, opt => opt.MapFrom(src => src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address.AdditionalStreetName.Value))
-                    .ForMember(destination => destination.PartyPostalCode, opt => opt.MapFrom(src => $"{src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address.PostalZone.Value} {src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address.CountrySubentity.Value}"))
                     .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
                     .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
                     .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapDetails(src.InvoiceLine)))
@@ -99,6 +82,10 @@ namespace CIUSPTToDDL.Lib
 
             return itemTransaction;
         }
+
+        #endregion
+
+        #region "Private"
 
         /// <summary>
         /// Maps a PartyType object to a Party object.
@@ -151,7 +138,7 @@ namespace CIUSPTToDDL.Lib
                 var detail = new Detail
                 {
                     // Map properties from InvoiceLineType to Detail here
-                    Quantity = (int?)invoiceLine?.Price?.BaseQuantity?.Value,
+                    Quantity = (int?)invoiceLine?.InvoicedQuantity?.Value,
                     UnitPrice = (double)invoiceLine?.Price?.PriceAmount?.Value,
                     ItemID = invoiceLine?.Item.SellersItemIdentification?.ID?.Value
                 };
