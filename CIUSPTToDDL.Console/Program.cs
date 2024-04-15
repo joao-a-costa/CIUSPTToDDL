@@ -16,6 +16,7 @@ var serializeOptions = new JsonSerializerSettings
 /// <summary>
 /// Serialize the item transaction object to JSON format.
 /// </summary>
-var serializeJson = JsonConvert.SerializeObject(itemTransaction, Formatting.Indented, serializeOptions);
+//var serializeJson = JsonConvert.SerializeObject(itemTransaction, Formatting.Indented, serializeOptions);
+var serializeJson = JsonConvert.SerializeObject(itemTransaction, Formatting.Indented);
 
 Console.WriteLine(serializeJson);
