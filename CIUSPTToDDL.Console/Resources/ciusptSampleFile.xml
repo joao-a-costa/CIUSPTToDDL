@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
+  <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+  <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT:1.0.0.</cbc:CustomizationID>
+  <cbc:ID>FAC 1/686</cbc:ID>
+  <cbc:IssueDate>2024-04-05</cbc:IssueDate>
+  <cbc:IssueTime>00:00:00.0000000+01:00</cbc:IssueTime>
+  <cbc:DueDate>2024-04-05</cbc:DueDate>
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <cbc:Note>#SOURCECURRENCYCODE#EUR#</cbc:Note>
+  <cbc:Note>#CALCULATIONRATE#1.0000#</cbc:Note>
+  <cbc:Note>#NUMBER@ATCERTIFIEDPROGRAM#2648#</cbc:Note>
+  <cbc:Note>#HASHCODE@ATCERTIFIEDPROGRAM#c4t1#</cbc:Note>
+  <cbc:Note>#DESCRIPTION@ATCERTIFIEDPROGRAM#c4t1-Processado por programa certificado 2648#</cbc:Note>
+  <cbc:Note>#DESCRIPTION@INVOICEPERIOD#Pronto Pagamento#</cbc:Note>
+  <cbc:TaxPointDate>2024-04-05</cbc:TaxPointDate>
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cbc:TaxCurrencyCode>EUR</cbc:TaxCurrencyCode>
+  <cbc:BuyerReference>5600000000000</cbc:BuyerReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID schemeID="ANG">00000000-686</cbc:ID>
+    <cbc:DocumentDescription>QR_CODE</cbc:DocumentDescription>
+    <cac:Attachment>
+      <cbc:EmbeddedDocumentBinaryObject mimeCode="text/plain" filename="$%()*"></cbc:EmbeddedDocumentBinaryObject>
+    </cac:Attachment>
+  </cac:AdditionalDocumentReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID schemeID="AIM">#PT510522130#PT249607956#FAC-1-686-</cbc:ID>
+  </cac:AdditionalDocumentReference>
+  <cac:AdditionalDocumentReference>
+    <cbc:ID>FAC 1/686</cbc:ID>
+    <cbc:DocumentDescription>INVOICE_REPRESENTATION</cbc:DocumentDescription>
+    <cac:Attachment>
+      <cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf" filename="FAC-1-686.PDF"></cbc:EmbeddedDocumentBinaryObject>
+    </cac:Attachment>
+  </cac:AdditionalDocumentReference>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="0001">PT510522130</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Demo - SmartDigit, Lda</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>Avenida da Republica 75A</cbc:StreetName>
+        <cbc:AdditionalStreetName>Loja 12</cbc:AdditionalStreetName>
+        <cbc:CityName>ALGÉS</cbc:CityName>
+        <cbc:PostalZone>1495-111</cbc:PostalZone>
+        <cbc:CountrySubentity>ALGÉS</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>PT</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>PT510522130</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Demo - SmartDigit, Lda</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Name>Demo - SmartDigit, Lda</cbc:Name>
+        <cbc:Telephone>351 211 165 222</cbc:Telephone>
+        <cbc:ElectronicMail>jcosta@smartdigit.pt</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="EM">jcosta@smartdigit.pt</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID>PT249607956</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>João Costa</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>nº 7B, 1º dir</cbc:StreetName>
+        <cbc:CityName>Algés</cbc:CityName>
+        <cbc:PostalZone>1495-062 Algés</cbc:PostalZone>
+        <cbc:CountrySubentity>Zona 1</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>PT</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>PT249607956</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>João Costa</cbc:RegistrationName>
+        <cbc:CompanyID>PT249607956</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Name>João Costa</cbc:Name>
+        <cbc:Telephone>123456789</cbc:Telephone>
+        <cbc:ElectronicMail>jcosta@smartdigit.pt</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <cbc:ActualDeliveryDate>2024-04-05</cbc:ActualDeliveryDate>
+    <cac:DeliveryLocation>
+      <cbc:ID schemeID="0088">5600000000000</cbc:ID>
+      <cac:Address>
+        <cbc:StreetName>Rua Francisco Duarte Pedroso</cbc:StreetName>
+        <cbc:AdditionalStreetName>nº 7B, 1º dir</cbc:AdditionalStreetName>
+        <cbc:CityName>Algés</cbc:CityName>
+        <cbc:PostalZone>1495-062</cbc:PostalZone>
+        <cbc:CountrySubentity>Algés</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>PT</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:DeliveryLocation>
+    <cac:DeliveryParty>
+      <cac:PartyName>
+        <cbc:Name>João Costa</cbc:Name>
+      </cac:PartyName>
+    </cac:DeliveryParty>
+  </cac:Delivery>
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>TB</cbc:PaymentMeansCode>
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>PT50570000350651829733676</cbc:ID>
+      <cbc:Name>CGD COnta</cbc:Name>
+      <cac:FinancialInstitutionBranch>
+        <cbc:ID>CGDIPTPL</cbc:ID>
+      </cac:FinancialInstitutionBranch>
+    </cac:PayeeFinancialAccount>
+  </cac:PaymentMeans>
+  <cac:PaymentTerms>
+    <cbc:Note>Pronto Pagamento</cbc:Note>
+  </cac:PaymentTerms>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">30.20</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="EUR">131.29</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="EUR">30.20</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>NOR</cbc:ID>
+        <cbc:Percent>23.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="EUR">131.29</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="EUR">131.29</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="EUR">161.49</cbc:TaxInclusiveAmount>
+    <cbc:ChargeTotalAmount currencyID="EUR">0.00</cbc:ChargeTotalAmount>
+    <cbc:PayableAmount currencyID="EUR">161.49</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="XUN">1.000</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">81.29</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>arigo2</cbc:Name>
+      <cac:SellersItemIdentification>
+        <cbc:ID>artigo2</cbc:ID>
+      </cac:SellersItemIdentification>
+      <cac:StandardItemIdentification>
+        <cbc:ID schemeID="0160">72083099999003</cbc:ID>
+      </cac:StandardItemIdentification>
+      <cac:OriginCountry>
+        <cbc:IdentificationCode>PT</cbc:IdentificationCode>
+      </cac:OriginCountry>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>NOR</cbc:ID>
+        <cbc:Percent>23.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">81.29</cbc:PriceAmount>
+      <cbc:BaseQuantity unitCode="XUN">1.00</cbc:BaseQuantity>
+    </cac:Price>
+  </cac:InvoiceLine>
+  <cac:InvoiceLine>
+    <cbc:ID>2</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="XUN">1.000</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">50.00</cbc:LineExtensionAmount>
+    <cac:Item>
+      <cbc:Name>artigoCius</cbc:Name>
+      <cac:SellersItemIdentification>
+        <cbc:ID>artigoCius</cbc:ID>
+      </cac:SellersItemIdentification>
+      <cac:OriginCountry>
+        <cbc:IdentificationCode>PT</cbc:IdentificationCode>
+      </cac:OriginCountry>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>NOR</cbc:ID>
+        <cbc:Percent>23.00</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">50.00</cbc:PriceAmount>
+      <cbc:BaseQuantity unitCode="XUN">1.00</cbc:BaseQuantity>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>

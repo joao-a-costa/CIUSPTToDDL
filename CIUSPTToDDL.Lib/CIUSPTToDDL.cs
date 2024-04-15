@@ -28,17 +28,28 @@ namespace CIUSPTToDDL.Lib
 
         #region "Public"
 
+
         /// <summary>
-        /// Parses the given XML file containing a CIUSPT invoice and maps it to an ItemTransaction object.
+        /// Parses a file containing a CIUSPT invoice and maps it to an ItemTransaction object.
         /// </summary>
         /// <param name="fileToParse">The XML file content to parse.</param>
         /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
-        public ItemTransaction Parse(string fileToParse)
+        public ItemTransaction ParseFromFile(string file)
+        {
+            return Parse(File.ReadAllText(file));
+        }
+
+        /// <summary>
+        /// Parses a string containing a CIUSPT invoice and maps it to an ItemTransaction object.
+        /// </summary>
+        /// <param name="fileToParse">The XML file content to parse.</param>
+        /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
+        public ItemTransaction Parse(string fileContent)
         {
             InvoiceType invoice = null;
 
             // Convert string to TextReader
-            using (TextReader reader = new StringReader(File.ReadAllText(fileToParse)))
+            using (TextReader reader = new StringReader(fileContent))
             {
                 invoice = UblDocument.Load<InvoiceType>(reader);
 
