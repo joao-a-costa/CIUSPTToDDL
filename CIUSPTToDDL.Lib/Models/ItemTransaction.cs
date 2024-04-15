@@ -108,7 +108,7 @@ namespace CIUSPTToDDL.Lib.Models
         public UnloadPlaceAddress UnloadPlaceAddress;
 
         [JsonProperty("TransactionTaxIncluded")]
-        public bool? TransactionTaxIncluded;
+        public bool? TransactionTaxIncluded = false;
 
         [JsonProperty("TransactionCreditSale")]
         public bool? TransactionCreditSale;
