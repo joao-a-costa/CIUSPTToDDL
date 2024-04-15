@@ -140,7 +140,8 @@ namespace CIUSPTToDDL.Lib
                     // Map properties from InvoiceLineType to Detail here
                     Quantity = (int?)invoiceLine?.InvoicedQuantity?.Value,
                     UnitPrice = (double)invoiceLine?.Price?.PriceAmount?.Value,
-                    ItemID = invoiceLine?.Item.SellersItemIdentification?.ID?.Value
+                    ItemID = invoiceLine?.Item.SellersItemIdentification?.ID?.Value,
+                    DiscountPercent = (double)invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value,
                 };
                 details.Add(detail);
             }

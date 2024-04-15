@@ -126,34 +126,34 @@ namespace CIUSPTToDDL.Lib.Models
         public int? RetentionTax;
 
         [JsonProperty("GlobalDiscountPercent")]
-        public int? GlobalDiscountPercent;
+        public double? GlobalDiscountPercent;
 
         [JsonProperty("PaymentDiscountPercent")]
-        public int? PaymentDiscountPercent;
+        public double? PaymentDiscountPercent;
 
         [JsonProperty("PaymentCumulativeDiscountPercent1")]
-        public int? PaymentCumulativeDiscountPercent1;
+        public double? PaymentCumulativeDiscountPercent1;
 
         [JsonProperty("PaymentCumulativeDiscountPercent2")]
-        public int? PaymentCumulativeDiscountPercent2;
+        public double? PaymentCumulativeDiscountPercent2;
 
         [JsonProperty("PaymentCumulativeDiscountPercent3")]
-        public int? PaymentCumulativeDiscountPercent3;
+        public double? PaymentCumulativeDiscountPercent3;
 
         [JsonProperty("TotalGrossAmount")]
         public double? TotalGrossAmount;
 
         [JsonProperty("TotalLineItemDiscountAmount")]
-        public int? TotalLineItemDiscountAmount;
+        public double? TotalLineItemDiscountAmount;
 
         [JsonProperty("TotalPaymentDiscountAmount")]
-        public int? TotalPaymentDiscountAmount;
+        public double? TotalPaymentDiscountAmount;
 
         [JsonProperty("TotalRedeemedVoucherAmount")]
-        public int? TotalRedeemedVoucherAmount;
+        public double? TotalRedeemedVoucherAmount;
 
         [JsonProperty("TotalGlobalDiscountAmount")]
-        public int? TotalGlobalDiscountAmount;
+        public double? TotalGlobalDiscountAmount;
 
         [JsonProperty("TotalNetAmount")]
         public double? TotalNetAmount;

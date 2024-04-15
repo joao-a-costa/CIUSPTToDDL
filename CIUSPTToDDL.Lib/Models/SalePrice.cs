@@ -56,7 +56,7 @@ namespace CIUSPTToDDL.Lib.Models
         public bool? ExcludesGlobalDiscount;
 
         [JsonProperty("DiscountPercent")]
-        public int? DiscountPercent;
+        public double? DiscountPercent;
 
         [JsonProperty("PriceUnitID")]
         public object PriceUnitID;
