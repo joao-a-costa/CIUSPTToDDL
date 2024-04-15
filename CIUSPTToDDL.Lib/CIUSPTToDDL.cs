@@ -65,6 +65,7 @@ namespace CIUSPTToDDL.Lib
                     .ForMember(destination => destination.ContractReferenceNumber, opt => opt.MapFrom(src => src.BuyerReference.Value))
                     .ForMember(destination => destination.TotalAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxExclusiveAmount.Value))
                     .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
+                    .ForMember(destination => destination.TotalGlobalDiscountAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.AllowanceTotalAmount.Value))
                     .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
                     .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
                     .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapDetails(src.InvoiceLine)))
@@ -141,8 +142,11 @@ namespace CIUSPTToDDL.Lib
                     Quantity = (int?)invoiceLine?.InvoicedQuantity?.Value,
                     UnitPrice = (double)invoiceLine?.Price?.PriceAmount?.Value,
                     ItemID = invoiceLine?.Item.SellersItemIdentification?.ID?.Value,
-                    DiscountPercent = (double)invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value,
                 };
+
+                if (invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
+                    detail.DiscountPercent = (double)invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
+
                 details.Add(detail);
             }
 
