@@ -174,10 +174,10 @@ namespace CIUSPTToDDL.Lib.Models
         public int? UnitCasesCount;
 
         [JsonProperty("DiscountPercent")]
-        public int? DiscountPercent;
+        public double? DiscountPercent;
 
         [JsonProperty("DiscountValue")]
-        public int? DiscountValue;
+        public double? DiscountValue;
 
         [JsonProperty("UnitDiscountValue")]
         public int? UnitDiscountValue;
@@ -189,7 +189,7 @@ namespace CIUSPTToDDL.Lib.Models
         public double? OriginalTaxIncludedPrice;
 
         [JsonProperty("OriginalDiscountPercent")]
-        public int? OriginalDiscountPercent;
+        public double? OriginalDiscountPercent;
 
         [JsonProperty("FamilyID")]
         public int? FamilyID;
@@ -213,22 +213,22 @@ namespace CIUSPTToDDL.Lib.Models
         public int? WarehouseReceipt;
 
         [JsonProperty("CumulativeDiscountPercent1")]
-        public int? CumulativeDiscountPercent1;
+        public double? CumulativeDiscountPercent1;
 
         [JsonProperty("CumulativeDiscountPercent2")]
-        public int? CumulativeDiscountPercent2;
+        public double? CumulativeDiscountPercent2;
 
         [JsonProperty("CumulativeDiscountPercent3")]
-        public int? CumulativeDiscountPercent3;
+        public double? CumulativeDiscountPercent3;
 
         [JsonProperty("PaymentDiscountPercent1")]
-        public int? PaymentDiscountPercent1;
+        public double? PaymentDiscountPercent1;
 
         [JsonProperty("PaymentDiscountPercent2")]
-        public int? PaymentDiscountPercent2;
+        public double? PaymentDiscountPercent2;
 
         [JsonProperty("PaymentDiscountPercent3")]
-        public int? PaymentDiscountPercent3;
+        public double? PaymentDiscountPercent3;
 
         [JsonProperty("PartyTypeCode")]
         public int? PartyTypeCode;
