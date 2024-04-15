@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CIUSPTToDDL.Lib.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using UblSharp;
 using UblSharp.CommonAggregateComponents;
 
@@ -13,21 +15,42 @@ namespace CIUSPTToDDL.Lib
     /// </summary>
     public class CIUSPTToDDL
     {
+        #region "Enums"
+
+        /// <summary>
+        /// The type of document being parsed.
+        /// </summary>
+        public enum DocumentType
+        {
+            Invoice,
+            CreditNote
+        }
+
+        #endregion
+
+        #region "Constants"
+
+        //private const string _documentTypeInvoice = "Invoice";
+        //private const string _documentTypeCreditNote = "CreditNote";
+        private const string _infoUnrecognizedDocumentType = "Unrecognized document type";
+
+        #endregion
+
         #region "Properties"
 
         /// <summary>
         /// The parsed InvoiceType object.
         /// </summary>
-        public InvoiceType ItemTransactionUBL { get; set; }
+        public IBaseDocument ItemTransactionUBL { get; set; }
         /// <summary>
         /// The parsed ItemTransaction object.
         /// </summary>
         public ItemTransaction ItemTransaction { get; set; }
+        public DocumentType ItemTransactionUBLDocumentType { get; set; } = DocumentType.Invoice;
 
         #endregion
 
         #region "Public"
-
 
         /// <summary>
         /// Parses a file containing a CIUSPT invoice and maps it to an ItemTransaction object.
@@ -46,37 +69,42 @@ namespace CIUSPTToDDL.Lib
         /// <returns>An ItemTransaction object representing the parsed invoice.</returns>
         public ItemTransaction Parse(string fileContent)
         {
-            InvoiceType invoice = null;
+            MapperConfiguration config = null;
+            XDocument doc = XDocument.Parse(fileContent);
+            XElement root = doc.Root;
 
-            // Convert string to TextReader
-            using (TextReader reader = new StringReader(fileContent))
+            // Initialize invoice object
+            IBaseDocument invoice = null;
+
+            // Load the XML based on the root element
+            if (root.Name.LocalName == DocumentType.CreditNote.ToString())
             {
-                invoice = UblDocument.Load<InvoiceType>(reader);
-
-                reader.Close();
+                invoice = UblDocument.Load<CreditNoteType>(new StringReader(fileContent));
+                ItemTransactionUBLDocumentType = DocumentType.CreditNote;
             }
+            else if (root.Name.LocalName == DocumentType.Invoice.ToString())
+            {
+                invoice = UblDocument.Load<InvoiceType>(new StringReader(fileContent));
+                ItemTransactionUBLDocumentType = DocumentType.Invoice;
+            }
+            else
+                throw new InvalidOperationException(_infoUnrecognizedDocumentType);
 
             // Configure AutoMapper mappings
-            var config = new MapperConfiguration(cfg =>
+            switch (ItemTransactionUBLDocumentType)
             {
-                cfg.CreateMap<InvoiceType, ItemTransaction>()
-                    .ForMember(destination => destination.CreateDate, opt => opt.MapFrom(src => src.IssueDate.Value.DateTime))
-                    .ForMember(destination => destination.DeferredPaymentDate, opt => opt.MapFrom(src => src.DueDate.Value.DateTime))
-                    .ForMember(destination => destination.ContractReferenceNumber, opt => opt.MapFrom(src => src.OrderReference.ID.Value))
-                    .ForMember(destination => destination.TotalAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxExclusiveAmount.Value))
-                    .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
-                    .ForMember(destination => destination.TotalGlobalDiscountAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.AllowanceTotalAmount.Value))
-                    .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
-                    .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
-                    .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapDetails(src.InvoiceLine)))
-                    .ForAllOtherMembers(opt => opt.Ignore()); // Ignore all other members, including methods
-            });
-
-            // Create the mapper
-            var mapper = config.CreateMapper();
+                case DocumentType.Invoice:
+                    config = MapInvoice();
+                    break;
+                case DocumentType.CreditNote:
+                    config = MapCreditNote();
+                    break;
+                default:
+                    break;
+            }
 
             // Map the InvoiceType object to an ItemTransaction object
-            var itemTransaction = mapper.Map<ItemTransaction>(invoice);
+            var itemTransaction = config.CreateMapper().Map<ItemTransaction>(invoice);
 
             ItemTransactionUBL = invoice;
             ItemTransaction = itemTransaction;
@@ -87,6 +115,52 @@ namespace CIUSPTToDDL.Lib
         #endregion
 
         #region "Private"
+
+        /// <summary>
+        /// Maps an InvoiceType object to an ItemTransaction object.
+        /// </summary>
+        /// <returns>The mapper configuration</returns>
+        private MapperConfiguration MapInvoice()
+        {
+            // Configure AutoMapper mappings
+            return new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<InvoiceType, ItemTransaction>()
+                    .ForMember(destination => destination.CreateDate, opt => opt.MapFrom(src => src.IssueDate.Value.DateTime))
+                    .ForMember(destination => destination.DeferredPaymentDate, opt => opt.MapFrom(src => src.DueDate.Value.DateTime))
+                    .ForMember(destination => destination.ContractReferenceNumber, opt => opt.MapFrom(src => src.OrderReference.ID.Value))
+                    .ForMember(destination => destination.TotalAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxExclusiveAmount.Value))
+                    .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
+                    .ForMember(destination => destination.TotalGlobalDiscountAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.AllowanceTotalAmount.Value))
+                    .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
+                    .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
+                    .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapInvoiceLines(src.InvoiceLine)))
+                    .ForAllOtherMembers(opt => opt.Ignore()); // Ignore all other members, including methods
+            });
+        }
+
+        /// <summary>
+        /// Maps a CreditNoteType object to an ItemTransaction object.
+        /// </summary>
+        /// <returns>The mapper configuration</returns>
+        private MapperConfiguration MapCreditNote()
+        {
+            // Configure AutoMapper mappings
+            return new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CreditNoteType, ItemTransaction>()
+                    .ForMember(destination => destination.CreateDate, opt => opt.MapFrom(src => src.IssueDate.Value.DateTime))
+                    //.ForMember(destination => destination.DeferredPaymentDate, opt => opt.MapFrom(src => src.DueDate.Value.DateTime))
+                    .ForMember(destination => destination.ContractReferenceNumber, opt => opt.MapFrom(src => src.OrderReference.ID.Value))
+                    .ForMember(destination => destination.TotalAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxExclusiveAmount.Value))
+                    .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
+                    .ForMember(destination => destination.TotalGlobalDiscountAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.AllowanceTotalAmount.Value))
+                    .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
+                    .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
+                    .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapCreditNoteLines(src.CreditNoteLine)))
+                    .ForAllOtherMembers(opt => opt.Ignore()); // Ignore all other members, including methods
+            });
+        }
 
         /// <summary>
         /// Maps a PartyType object to a Party object.
@@ -130,7 +204,7 @@ namespace CIUSPTToDDL.Lib
         /// </summary>
         /// <param name="invoiceLines"></param>
         /// <returns></returns>
-        private List<Detail> MapDetails(IEnumerable<InvoiceLineType> invoiceLines)
+        private List<Detail> MapInvoiceLines(IEnumerable<InvoiceLineType> invoiceLines)
         {
             var details = new List<Detail>();
 
@@ -146,6 +220,34 @@ namespace CIUSPTToDDL.Lib
 
                 if (invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
                     detail.DiscountPercent = (double)invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
+
+                details.Add(detail);
+            }
+
+            return details;
+        }
+
+        /// <summary>
+        /// Maps a collection of CreditNoteLineType objects to a collection of Detail objects.
+        /// </summary>
+        /// <param name="creditNoteLines"></param>
+        /// <returns></returns>
+        private List<Detail> MapCreditNoteLines(IEnumerable<CreditNoteLineType> creditNoteLines)
+        {
+            var details = new List<Detail>();
+
+            foreach (var creditNoteLine in creditNoteLines)
+            {
+                var detail = new Detail
+                {
+                    // Map properties from InvoiceLineType to Detail here
+                    Quantity = (int?)creditNoteLine?.CreditedQuantity?.Value,
+                    UnitPrice = (double)creditNoteLine?.Price?.PriceAmount?.Value,
+                    ItemID = creditNoteLine?.Item.SellersItemIdentification?.ID?.Value,
+                };
+
+                if (creditNoteLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
+                    detail.DiscountPercent = (double)creditNoteLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
 
                 details.Add(detail);
             }
