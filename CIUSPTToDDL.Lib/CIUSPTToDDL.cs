@@ -22,8 +22,8 @@ namespace CIUSPTToDDL.Lib
         /// </summary>
         public enum DocumentType
         {
-            Invoice,
-            CreditNote
+            Invoice = 1,
+            CreditNote = 2
         }
 
         #endregion
