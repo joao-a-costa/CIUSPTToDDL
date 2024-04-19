@@ -133,6 +133,8 @@ namespace CIUSPTToDDL.Lib
                     .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
                     .ForMember(destination => destination.TotalGlobalDiscountAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.AllowanceTotalAmount.Value))
                     .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
+                    .ForPath(destination => destination.CustomerParty, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
+                    .ForPath(destination => destination.SupplierParty, opt => opt.MapFrom(src => MapParty(src.AccountingSupplierParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
                     .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
                     .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapInvoiceLines(src.InvoiceLine)))
                     .ForAllOtherMembers(opt => opt.Ignore()); // Ignore all other members, including methods
@@ -156,6 +158,8 @@ namespace CIUSPTToDDL.Lib
                     .ForMember(destination => destination.TotalTransactionAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.TaxInclusiveAmount.Value))
                     .ForMember(destination => destination.TotalGlobalDiscountAmount, opt => opt.MapFrom(src => src.LegalMonetaryTotal.AllowanceTotalAmount.Value))
                     .ForPath(destination => destination.Party, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
+                    .ForPath(destination => destination.CustomerParty, opt => opt.MapFrom(src => MapParty(src.AccountingCustomerParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
+                    .ForPath(destination => destination.SupplierParty, opt => opt.MapFrom(src => MapParty(src.AccountingSupplierParty.Party, src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation)))
                     .ForPath(destination => destination.UnloadPlaceAddress, opt => opt.MapFrom(src => MapUnloadPlaceAddress(src.Delivery.Cast<DeliveryType>().FirstOrDefault().DeliveryLocation.Address)))
                     .ForPath(destination => destination.Details, opt => opt.MapFrom(src => MapCreditNoteLines(src.CreditNoteLine)))
                     .ForAllOtherMembers(opt => opt.Ignore()); // Ignore all other members, including methods
