@@ -212,18 +212,19 @@ namespace CIUSPTToDDL.Lib
         {
             var details = new List<Detail>();
 
-            foreach (var invoiceLine in invoiceLines)
+            foreach (var line in invoiceLines)
             {
                 var detail = new Detail
                 {
                     // Map properties from InvoiceLineType to Detail here
-                    Quantity = (int?)invoiceLine?.InvoicedQuantity?.Value,
-                    UnitPrice = (double)invoiceLine?.Price?.PriceAmount?.Value,
-                    ItemID = invoiceLine?.Item.SellersItemIdentification?.ID?.Value,
+                    Quantity = (int?)line?.InvoicedQuantity?.Value,
+                    UnitPrice = (double)line?.Price?.PriceAmount?.Value,
+                    ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
+                    Description = line?.Item?.Description?.FirstOrDefault()?.Value
                 };
 
-                if (invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
-                    detail.DiscountPercent = (double)invoiceLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
+                if (line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
+                    detail.DiscountPercent = (double)line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
 
                 details.Add(detail);
             }
@@ -240,18 +241,19 @@ namespace CIUSPTToDDL.Lib
         {
             var details = new List<Detail>();
 
-            foreach (var creditNoteLine in creditNoteLines)
+            foreach (var line in creditNoteLines)
             {
                 var detail = new Detail
                 {
                     // Map properties from InvoiceLineType to Detail here
-                    Quantity = (int?)creditNoteLine?.CreditedQuantity?.Value,
-                    UnitPrice = (double)creditNoteLine?.Price?.PriceAmount?.Value,
-                    ItemID = creditNoteLine?.Item.SellersItemIdentification?.ID?.Value,
+                    Quantity = (int?)line?.CreditedQuantity?.Value,
+                    UnitPrice = (double)line?.Price?.PriceAmount?.Value,
+                    ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
+                    Description = line?.Item?.Description?.FirstOrDefault()?.Value
                 };
 
-                if (creditNoteLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
-                    detail.DiscountPercent = (double)creditNoteLine?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
+                if (line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
+                    detail.DiscountPercent = (double)line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
 
                 details.Add(detail);
             }
