@@ -419,6 +419,12 @@ namespace CIUSPTToDDL.Lib.Models
         [JsonProperty("TotalAdvancementNetAmount")]
         public int? TotalAdvancementNetAmount;
 
+        [JsonProperty("CustomerParty")]
+        public Party CustomerParty;
+
+        [JsonProperty("SupplierParty")]
+        public Party SupplierParty;
+
         [JsonProperty("Party")]
         public Party Party;
 
