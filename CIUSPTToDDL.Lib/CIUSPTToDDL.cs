@@ -7,6 +7,7 @@ using System.Linq;
 using System.Xml.Linq;
 using UblSharp;
 using UblSharp.CommonAggregateComponents;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace CIUSPTToDDL.Lib
 {
@@ -221,9 +222,20 @@ namespace CIUSPTToDDL.Lib
                     // Map properties from InvoiceLineType to Detail here
                     Quantity = (int?)line?.InvoicedQuantity?.Value,
                     UnitPrice = (double)line?.Price?.PriceAmount?.Value,
+                    TotalNetAmount = (double)line?.LineExtensionAmount?.Value,
                     ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
-                    Description = description
+                    Description = description,
+                    TaxList = new List<TaxList>
+                    {
+                        new TaxList
+                        {
+                            TaxRate = (double?)(line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.Percent?.Value),
+                            TaxCode = line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.ID?.Value,
+                        }
+                    }
                 };
+
+                
 
                 if (line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
                     detail.DiscountPercent = (double)line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
