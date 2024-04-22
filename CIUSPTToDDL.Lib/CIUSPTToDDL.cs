@@ -214,13 +214,15 @@ namespace CIUSPTToDDL.Lib
 
             foreach (var line in invoiceLines)
             {
+                var description = line?.Item?.Description?.FirstOrDefault()?.Value ?? line?.Item?.Name?.Value;
+
                 var detail = new Detail
                 {
                     // Map properties from InvoiceLineType to Detail here
                     Quantity = (int?)line?.InvoicedQuantity?.Value,
                     UnitPrice = (double)line?.Price?.PriceAmount?.Value,
                     ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
-                    Description = line?.Item?.Description?.FirstOrDefault()?.Value
+                    Description = description
                 };
 
                 if (line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
