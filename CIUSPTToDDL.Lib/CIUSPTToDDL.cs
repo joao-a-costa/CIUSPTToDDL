@@ -178,7 +178,7 @@ namespace CIUSPTToDDL.Lib
             return new Party
             {
                 // Map properties from PartyType to Party here
-                FederalTaxID = partyType.PartyIdentification?.FirstOrDefault()?.ID.Value,
+                FederalTaxID = partyType.PartyTaxScheme?.FirstOrDefault()?.CompanyID?.Value,
                 OrganizationName = partyType.PartyName?.FirstOrDefault()?.Name.Value,
                 AddressLine1 = partyType.PostalAddress?.StreetName?.Value,
                 AddressLine2 = partyType.PostalAddress?.AdditionalStreetName?.Value,
