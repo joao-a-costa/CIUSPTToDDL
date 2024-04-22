@@ -72,5 +72,18 @@ namespace CIUSPTToDDL.Console.Properties {
                 return ResourceManager.GetString("ciusptSampleFile", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;Invoice xmlns:cbc=&quot;urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2&quot; xmlns:cac=&quot;urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;urn:oasis:names:specification:ubl:schema:xsd:Invoice-2&quot;&gt;
+        ///  &lt;cbc:UBLVersionID&gt;2.1&lt;/cbc:UBLVersionID&gt;
+        ///  &lt;cbc:CustomizationID&gt;urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT:1.0.0.&lt;/cbc:CustomizationID&gt;
+        ///  &lt;cbc:ID&gt;FAC 1/710&lt;/cb [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ciusptSampleFile2 {
+            get {
+                return ResourceManager.GetString("ciusptSampleFile2", resourceCulture);
+            }
+        }
     }
 }

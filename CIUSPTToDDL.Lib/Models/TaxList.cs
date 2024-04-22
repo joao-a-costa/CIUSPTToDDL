@@ -11,7 +11,7 @@ namespace CIUSPTToDDL.Lib.Models
         public int? TaxSequenceID;
 
         [JsonProperty("TaxRate")]
-        public int? TaxRate;
+        public double? TaxRate;
 
         [JsonProperty("Printable")]
         public bool? Printable;
