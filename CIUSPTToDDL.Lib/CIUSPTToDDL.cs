@@ -257,14 +257,27 @@ namespace CIUSPTToDDL.Lib
 
             foreach (var line in creditNoteLines)
             {
+                var description = line?.Item?.Description?.FirstOrDefault()?.Value ?? line?.Item?.Name?.Value;
+
                 var detail = new Detail
                 {
                     // Map properties from InvoiceLineType to Detail here
                     Quantity = (int?)line?.CreditedQuantity?.Value,
                     UnitPrice = (double)line?.Price?.PriceAmount?.Value,
+                    TotalNetAmount = (double)line?.LineExtensionAmount?.Value,
                     ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
-                    Description = line?.Item?.Description?.FirstOrDefault()?.Value
+                    Description = description,
+                    TaxList = new List<TaxList>
+            {
+                new TaxList
+                {
+                    TaxRate = (double?)(line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.Percent?.Value),
+                    TaxCode = line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.ID?.Value,
+                }
+            }
                 };
+
+
 
                 if (line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
                     detail.DiscountPercent = (double)line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
