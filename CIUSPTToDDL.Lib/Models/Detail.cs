@@ -454,7 +454,8 @@ namespace CIUSPTToDDL.Lib.Models
 
         [JsonProperty("RetentionTax")]
         public int? RetentionTax;
+
+        [JsonProperty("Notes")]
+        public List<string> DetailNotes;
     }
-
-
 }
