@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 var cIUSPTToDDL = new CIUSPTToDDL.Lib.CIUSPTToDDL();
-var itemTransaction = cIUSPTToDDL.Parse(CIUSPTToDDL.Console.Properties.Resources.ciusptSampleFile3);
+var itemTransaction = cIUSPTToDDL.Parse(CIUSPTToDDL.Console.Properties.Resources.ciusptSampleFile5);
 var itemtransactionUBL = cIUSPTToDDL.ItemTransactionUBL;
 
 
@@ -20,3 +20,4 @@ var serializeJson = JsonConvert.SerializeObject(itemTransaction, Formatting.Inde
 //var serializeJson = JsonConvert.SerializeObject(itemTransaction, Formatting.Indented);
 
 Console.WriteLine(serializeJson);
+Console.ReadLine();
