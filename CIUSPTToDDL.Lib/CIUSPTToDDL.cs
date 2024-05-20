@@ -232,7 +232,8 @@ namespace CIUSPTToDDL.Lib
                             TaxRate = (double?)(line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.Percent?.Value),
                             TaxCode = line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.ID?.Value,
                         }
-                    }
+                    },
+                    DetailNotes = line?.Note?.Select(n => n.Value).ToList()
                 };
 
                 
@@ -268,16 +269,15 @@ namespace CIUSPTToDDL.Lib
                     ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
                     Description = description,
                     TaxList = new List<TaxList>
-            {
-                new TaxList
-                {
-                    TaxRate = (double?)(line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.Percent?.Value),
-                    TaxCode = line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.ID?.Value,
-                }
-            }
+                    {
+                        new TaxList
+                        {
+                            TaxRate = (double?)(line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.Percent?.Value),
+                            TaxCode = line?.Item?.ClassifiedTaxCategory?.FirstOrDefault()?.ID?.Value,
+                        }
+                    },
+                    DetailNotes = line?.Note?.Select(n => n.Value).ToList()
                 };
-
-
 
                 if (line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value != null)
                     detail.DiscountPercent = (double)line?.AllowanceCharge?.FirstOrDefault()?.MultiplierFactorNumeric.Value;
