@@ -133,4 +133,10 @@
   <data name="ciusptSampleFile5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ciusptSampleFile5.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ciusptSampleFile6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ciusptSampleFile6.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ciusptSampleFile7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ciusptSampleFile7.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>
