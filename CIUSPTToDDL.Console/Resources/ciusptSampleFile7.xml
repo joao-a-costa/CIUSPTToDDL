@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:n2="urn:oasis:names:specification:ubl:schema:xsd:CommonSignatureComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDataTypes-2" xmlns:sac="urn:oasis:names:specification:ubl:schema:xsd:SignatureAggregateComponents-2" xmlns:sbc="urn:oasis:names:specification:ubl:schema:xsd:SignatureBasicComponents-2" xmlns:udt="urn:oasis:names:specification:ubl:schema:xsd:UnqualifiedDataTypes-2" xmlns:ccts-cct="urn:un:unece:uncefact:data:specification:CoreComponentTypeSchemaModule:2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
+	<cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+	<cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:feap.gov.pt:CIUS-PT:2.1.1</cbc:CustomizationID>
+	<cbc:ID>FAC 202401/2735</cbc:ID>
+	<cbc:IssueDate>2024-05-09</cbc:IssueDate>
+	<cbc:DueDate>2024-06-08</cbc:DueDate>
+	<cbc:InvoiceTypeCode listID="UNCL1001">FT</cbc:InvoiceTypeCode>
+	<cbc:DocumentCurrencyCode listID="ISO4217">EUR</cbc:DocumentCurrencyCode>
+	<cac:AccountingSupplierParty>
+		<cac:Party>
+			<cac:PostalAddress>
+				<cbc:StreetName>RUA FERNANDO FARINHA N 2 A E B LISBOA</cbc:StreetName>
+				<cbc:CityName>LISBOA</cbc:CityName>
+				<cbc:PostalZone>1950-448</cbc:PostalZone>
+				<cac:Country>
+					<cbc:IdentificationCode>PT</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>PT508949203</cbc:CompanyID>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>PAULO ALEXANDRE FERREIRA UNIPESSOAL LDA</cbc:RegistrationName>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingSupplierParty>
+	<cac:AccountingCustomerParty>
+		<cac:Party>
+			<cac:PostalAddress>
+				<cbc:StreetName>RUA MARCELINO MESQUITA N 9 LOJA 4 ALTO DE SANTA CATARINA LINDA-A-VELHA</cbc:StreetName>
+				<cbc:CityName>LINDA A VELHA</cbc:CityName>
+				<cbc:PostalZone>2795-134</cbc:PostalZone>
+				<cac:Country>
+					<cbc:IdentificationCode>PT</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>PT510522130</cbc:CompanyID>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>SMARTDIGIT UNIPESSOAL LDA</cbc:RegistrationName>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingCustomerParty>
+	<cac:Delivery>
+		<cbc:ActualDeliveryDate>2024-05-09</cbc:ActualDeliveryDate>
+		<cac:DeliveryLocation>
+			<cac:Address>
+				<cbc:StreetName>nº 9 Loja 4 Rua Marcelino Mesquita</cbc:StreetName>
+				<cbc:CityName>FUNCHAL</cbc:CityName>
+				<cbc:PostalZone>9000-267</cbc:PostalZone>
+				<cac:Country>
+					<cbc:IdentificationCode>PT</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:Address>
+		</cac:DeliveryLocation>
+	</cac:Delivery>
+	<cac:TaxTotal>
+		<cbc:TaxAmount currencyID="EUR">10.80</cbc:TaxAmount>
+		<cac:TaxSubtotal>
+			<cbc:TaxableAmount currencyID="EUR">46.950</cbc:TaxableAmount>
+			<cbc:TaxAmount currencyID="EUR">10.80</cbc:TaxAmount>
+			<cac:TaxCategory>
+				<cbc:ID>NOR</cbc:ID>
+				<cbc:Percent>23.00</cbc:Percent>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:TaxCategory>
+		</cac:TaxSubtotal>
+	</cac:TaxTotal>
+	<cac:LegalMonetaryTotal>
+		<cbc:LineExtensionAmount currencyID="EUR">46.95</cbc:LineExtensionAmount>
+		<cbc:TaxExclusiveAmount currencyID="EUR">46.95</cbc:TaxExclusiveAmount>
+		<cbc:TaxInclusiveAmount currencyID="EUR">57.75</cbc:TaxInclusiveAmount>
+		<cbc:AllowanceTotalAmount currencyID="EUR">0.00</cbc:AllowanceTotalAmount>
+		<cbc:ChargeTotalAmount currencyID="EUR">0.00</cbc:ChargeTotalAmount>
+		<cbc:PrepaidAmount currencyID="EUR">0.00</cbc:PrepaidAmount>
+		<cbc:PayableRoundingAmount currencyID="EUR">0.00</cbc:PayableRoundingAmount>
+		<cbc:PayableAmount currencyID="EUR">57.75</cbc:PayableAmount>
+	</cac:LegalMonetaryTotal>
+	<cac:InvoiceLine>
+		<cbc:ID>31d2b765-9397-40cb-86eb-c593a27c17a9</cbc:ID>
+		<cbc:InvoicedQuantity unitCode="XZZ">1.000</cbc:InvoicedQuantity>
+		<cbc:LineExtensionAmount currencyID="EUR">8.9500</cbc:LineExtensionAmount>
+		<cac:Item>
+			<cbc:Name>PATCH PANEL UTP KEYSTONE 24 PORTAS 19" 1U PRETO</cbc:Name>
+			<cac:BuyersItemIdentification>
+				<cbc:ID>PAP-02C602411</cbc:ID>
+			</cac:BuyersItemIdentification>
+			<cac:ClassifiedTaxCategory>
+				<cbc:ID>NOR</cbc:ID>
+				<cbc:Percent>23.00</cbc:Percent>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:ClassifiedTaxCategory>
+		</cac:Item>
+		<cac:Price>
+			<cbc:PriceAmount currencyID="EUR">8.95000</cbc:PriceAmount>
+			<cbc:BaseQuantity unitCode="XZZ">1.000</cbc:BaseQuantity>
+		</cac:Price>
+	</cac:InvoiceLine>
+	<cac:InvoiceLine>
+		<cbc:ID>14fd34bf-33f4-4c49-84ca-37b5ef73bd4c</cbc:ID>
+		<cbc:InvoicedQuantity unitCode="XZZ">24.000</cbc:InvoicedQuantity>
+		<cbc:LineExtensionAmount currencyID="EUR">28.8000</cbc:LineExtensionAmount>
+		<cac:Item>
+			<cbc:Name>MODULO KEYSTONE UTP CAT6 TOOL FREE (BRANCO)</cbc:Name>
+			<cac:BuyersItemIdentification>
+				<cbc:ID>KEY-02C601001</cbc:ID>
+			</cac:BuyersItemIdentification>
+			<cac:ClassifiedTaxCategory>
+				<cbc:ID>NOR</cbc:ID>
+				<cbc:Percent>23.00</cbc:Percent>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:ClassifiedTaxCategory>
+		</cac:Item>
+		<cac:Price>
+			<cbc:PriceAmount currencyID="EUR">1.20000</cbc:PriceAmount>
+			<cbc:BaseQuantity unitCode="XZZ">1.000</cbc:BaseQuantity>
+		</cac:Price>
+	</cac:InvoiceLine>
+	<cac:InvoiceLine>
+		<cbc:ID>3dfba86b-632e-4a6f-b449-b7e326f88aaf</cbc:ID>
+		<cbc:InvoicedQuantity unitCode="XZZ">1.000</cbc:InvoicedQuantity>
+		<cbc:LineExtensionAmount currencyID="EUR">9.2000</cbc:LineExtensionAmount>
+		<cac:Item>
+			<cbc:Name>PORTES DE ENVIO</cbc:Name>
+			<cac:BuyersItemIdentification>
+				<cbc:ID>PORTES</cbc:ID>
+			</cac:BuyersItemIdentification>
+			<cac:ClassifiedTaxCategory>
+				<cbc:ID>NOR</cbc:ID>
+				<cbc:Percent>23.00</cbc:Percent>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:ClassifiedTaxCategory>
+		</cac:Item>
+		<cac:Price>
+			<cbc:PriceAmount currencyID="EUR">9.20000</cbc:PriceAmount>
+			<cbc:BaseQuantity unitCode="XZZ">1.000</cbc:BaseQuantity>
+		</cac:Price>
+	</cac:InvoiceLine>
+</Invoice>

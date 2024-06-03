@@ -174,12 +174,17 @@ namespace CIUSPTToDDL.Lib
         /// <returns></returns>
         private Party MapParty(PartyType partyType, LocationType locationType)
         {
+            var organizationName =
+                partyType.PartyLegalEntity?.FirstOrDefault()?.RegistrationName?.Value
+                ??
+                partyType.PartyName?.FirstOrDefault()?.Name?.Value;
+
             // TODO: verify if CountryID is ISO 3166-1 alpha-2 code
             return new Party
             {
                 // Map properties from PartyType to Party here
                 FederalTaxID = partyType.PartyTaxScheme?.FirstOrDefault()?.CompanyID?.Value,
-                OrganizationName = partyType.PartyName?.FirstOrDefault()?.Name.Value,
+                OrganizationName = organizationName,
                 AddressLine1 = partyType.PostalAddress?.StreetName?.Value,
                 AddressLine2 = partyType.PostalAddress?.AdditionalStreetName?.Value,
                 PostalCode = partyType.PostalAddress?.PostalZone?.Value,
