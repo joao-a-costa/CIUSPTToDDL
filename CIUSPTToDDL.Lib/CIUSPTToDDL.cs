@@ -228,7 +228,7 @@ namespace CIUSPTToDDL.Lib
                     Quantity = (int?)line?.InvoicedQuantity?.Value,
                     UnitPrice = (double)line?.Price?.PriceAmount?.Value,
                     TotalNetAmount = (double)line?.LineExtensionAmount?.Value,
-                    ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
+                    ItemID = line?.Item.SellersItemIdentification?.ID?.Value ?? line?.Item.BuyersItemIdentification?.ID?.Value,
                     Description = description,
                     TaxList = new List<TaxList>
                     {
@@ -271,7 +271,7 @@ namespace CIUSPTToDDL.Lib
                     Quantity = (int?)line?.CreditedQuantity?.Value,
                     UnitPrice = (double)line?.Price?.PriceAmount?.Value,
                     TotalNetAmount = (double)line?.LineExtensionAmount?.Value,
-                    ItemID = line?.Item.SellersItemIdentification?.ID?.Value,
+                    ItemID = line?.Item.SellersItemIdentification?.ID?.Value ?? line?.Item.BuyersItemIdentification?.ID?.Value,
                     Description = description,
                     TaxList = new List<TaxList>
                     {
